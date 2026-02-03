@@ -1,0 +1,831 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pooja Stationers & Gift Articles</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --primary:#ff4d6d;
+  --secondary:#3a86ff;
+  --bg:#f8fbff;
+  --card:#ffffff;
+  --shadow:0 8px 20px rgba(0,0,0,0.08);
+}
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font-family:'Poppins',sans-serif;
+  background:linear-gradient(135deg,#fff3e8,#e9f5ff);
+  color:#333;
+}
+a{text-decoration:none;color:inherit}
+img{max-width:100%;border-radius:14px}
+
+/* Header */
+header{
+  position:sticky;top:0;z-index:999;
+  background:#fff;
+  box-shadow:0 4px 12px rgba(0,0,0,.06);
+  padding:12px 16px;
+  display:flex;align-items:center;justify-content:space-between;
+}
+.logo{
+  font-weight:700;
+  font-size:18px;
+  color:var(--primary);
+}
+nav{
+  display:flex;gap:14px;font-size:14px;font-weight:600;
+}
+nav a{padding:6px 10px;border-radius:20px}
+nav a:hover{background:#f1f5ff}
+
+/* Hero */
+.hero{
+  padding:48px 16px 40px;
+  text-align:center;
+}
+.hero h1{
+  margin:0;
+  font-size:30px;
+  color:var(--secondary);
+}
+.hero p{
+  font-size:16px;
+  margin:10px 0;
+}
+.cta-row{
+  display:flex;flex-wrap:wrap;gap:12px;justify-content:center;margin-top:18px;
+}
+.btn{
+  padding:12px 20px;
+  border-radius:30px;
+  font-weight:600;
+  font-size:14px;
+  display:inline-flex;align-items:center;gap:8px;
+  box-shadow:var(--shadow);
+  cursor:pointer;
+  border:none;
+}
+.btn-primary{background:#25D366;color:#fff}
+.btn-outline{background:#fff;color:#333;border:1.5px solid #e3e8ff}
+
+/* Banner */
+.banner{
+  margin:10px 16px 0;
+  background:linear-gradient(135deg,#ffdde5,#e0ecff);
+  border-radius:18px;
+  padding:16px;
+  box-shadow:var(--shadow);
+  text-align:center;
+}
+.banner strong{color:#ff4d6d}
+
+/* Sections */
+.section{
+  padding:44px 16px 10px;
+  text-align:center;
+}
+.section h2{
+  margin:0 0 10px;
+  font-size:24px;
+  color:#222;
+}
+.section p{max-width:780px;margin:6px auto 0;font-size:15px}
+
+/* Grid */
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
+  gap:16px;
+  margin-top:20px;
+}
+.card{
+  background:var(--card);
+  padding:18px;
+  border-radius:18px;
+  box-shadow:var(--shadow);
+}
+
+/* Products */
+.product{
+  text-align:left;
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+}
+.product img{height:140px;object-fit:cover}
+.product h3{margin:4px 0}
+.product .actions{
+  display:flex;
+  gap:8px;
+  margin-top:6px;
+}
+.product .actions button{
+  flex:1;
+  padding:10px;
+  border-radius:20px;
+  border:none;
+  font-weight:600;
+  cursor:pointer;
+  background:#f1f5ff;
+}
+.product .actions button.primary{
+  background:#3a86ff;
+  color:white;
+}
+
+/* 🔥 CATEGORY BUTTONS (BIGGER + HIGHLIGHTED) */
+.category-buttons{
+  display:flex;
+  flex-wrap:wrap;
+  gap:14px;
+  justify-content:center;
+  margin-top:22px;
+}
+.category-buttons button{
+  padding:14px 22px;
+  font-size:15px;
+  border-radius:28px;
+  border:none;
+  font-weight:700;
+  cursor:pointer;
+  background:linear-gradient(135deg,#ffffff,#f1f5ff);
+  box-shadow:0 10px 24px rgba(0,0,0,0.12);
+  transition:all .25s ease;
+}
+.category-buttons button:hover{
+  transform:translateY(-2px) scale(1.03);
+  box-shadow:0 14px 30px rgba(0,0,0,0.18);
+}
+.category-buttons button.active{
+  background:linear-gradient(135deg,#3a86ff,#6fa8ff);
+  color:#fff;
+  box-shadow:0 16px 36px rgba(58,134,255,0.45);
+  transform:scale(1.06);
+}
+
+/* Wishlist Panel */
+.wishlist-btn{
+  position:fixed;
+  bottom:90px;
+  right:20px;
+  background:#3a86ff;
+  color:white;
+  width:56px;
+  height:56px;
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:22px;
+  box-shadow:0 8px 20px rgba(0,0,0,0.25);
+  z-index:999;
+  cursor:pointer;
+}
+.wishlist-count{
+  position:absolute;
+  top:-4px;
+  right:-4px;
+  background:#ff4d6d;
+  color:white;
+  font-size:11px;
+  font-weight:700;
+  padding:3px 6px;
+  border-radius:50%;
+}
+
+.wishlist-panel{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.45);
+  display:none;
+  align-items:flex-end;
+  z-index:1000;
+}
+.wishlist-panel.active{display:flex}
+.wishlist-box{
+  background:white;
+  width:100%;
+  max-height:70%;
+  border-radius:22px 22px 0 0;
+  padding:16px;
+  overflow:auto;
+}
+.wishlist-header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:10px;
+}
+.wishlist-item{
+  display:flex;
+  gap:10px;
+  align-items:center;
+  margin:10px 0;
+}
+.wishlist-item img{
+  width:60px;
+  height:60px;
+  object-fit:cover;
+  border-radius:10px;
+}
+.wishlist-item button{
+  margin-left:auto;
+  background:#ff4d6d;
+  color:white;
+  border:none;
+  padding:6px 10px;
+  border-radius:14px;
+  cursor:pointer;
+  font-size:12px;
+}
+
+/* About */
+.about-box{
+  background:#fff;
+  border-radius:20px;
+  padding:20px;
+  box-shadow:var(--shadow);
+  margin-top:20px;
+  text-align:center;
+}
+.about-links{
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+  align-items:center;
+}
+.about-links a{
+  font-weight:600;
+  color:#3a86ff;
+}
+
+/* Location */
+.map-box{
+  background:#fff;
+  border-radius:20px;
+  overflow:hidden;
+  box-shadow:var(--shadow);
+  margin-top:20px;
+}
+.map-box iframe{
+  width:100%;
+  height:260px;
+  border:0;
+}
+
+/* Footer */
+footer{
+  text-align:center;
+  padding:30px 16px 90px;
+  font-size:13px;
+  color:#555;
+}
+
+/* Floating WhatsApp */
+.floating-wa{
+  position:fixed;
+  bottom:20px;
+  right:20px;
+  background:#25D366;
+  color:white;
+  width:58px;
+  height:58px;
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:28px;
+  text-decoration:none;
+  box-shadow:0 8px 20px rgba(0,0,0,0.25);
+  z-index:999;
+  animation:pulse 2s infinite;
+}
+@keyframes pulse{
+  0%{box-shadow:0 0 0 0 rgba(37,211,102,.6)}
+  70%{box-shadow:0 0 0 14px rgba(37,211,102,0)}
+  100%{box-shadow:0 0 0 0 rgba(37,211,102,0)}
+}
+
+/* Small devices */
+@media(max-width:480px){
+  .hero h1{font-size:24px}
+  nav{display:none}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">🎀 Pooja Stationers & Gift Articles</div>
+  <nav>
+    <a href="#home">Home</a>
+    <a href="#categories">Categories</a>
+    <a href="#products">Products</a>
+    <a href="#about">About</a>
+    <a href="#location">Location</a>
+  </nav>
+</header>
+
+<!-- Hero -->
+<section id="home" class="hero">
+  <h1>Pooja Stationers & Gift Articles</h1>
+  <p>Your One-Stop Shop for Stationery, Gifts & Xerox Services</p>
+  <p>📍 Vatva, Ahmedabad</p>
+  <div class="cta-row">
+    <a class="btn btn-primary" href="https://wa.me/918200304556" target="_blank">💬 WhatsApp Us</a>
+    <a class="btn btn-outline" href="#location">📍 Get Location</a>
+  </div>
+</section>
+
+<!-- Banner -->
+<div class="banner">
+  🎉 <strong>Offer Banner Area</strong> — New Offer coming soon.
+</div>
+
+<!-- Categories -->
+<section id="categories" class="section">
+  <h2>Shop by Category</h2>
+
+  <div class="category-buttons">
+    
+    <button onclick="showCategory('school', this)">✏️ School Stationery</button>
+    <button onclick="showCategory('gift', this)">🎁 Gift Articles</button>
+    <button onclick="showCategory('art', this)">🎨 Art & Craft</button>
+    <button onclick="showCategory('office', this)">📎 Office Supplies</button>
+    <button onclick="showCategory('sports', this)">🏏 Sports</button>
+<button onclick="showCategory('decor', this)">🎀 Decoration</button>
+<button onclick="showCategory('custom', this)">🖨Custom Products</button>
+<button onclick="showCategory('xerox', this)">📄 Xerox etc..</button>
+  </div>
+</section>
+
+<!-- Products -->
+<section id="products" class="section">
+  <h2 id="productTitle">Popular Products</h2>
+  <p id="productSubtitle">Our top selling items</p>
+  <div class="grid" id="productGrid"></div>
+</section>
+
+<!-- About Us -->
+<section id="about" class="section">
+  <h2>About Us</h2>
+  <div class="about-box">
+    <div class="about-links">
+      <a href="https://www.instagram.com/pooja_stationers_gift_articles" target="_blank">📸 Instagram: @pooja_stationers_gift_articles</a>
+      <a href="tel:+918200304556">📞 Contact: 82003 04556</a>
+      <div>© 2026 Pooja Stationers & Gift Articles. All rights reserved.</div>
+    </div>
+  </div>
+</section>
+
+<!-- Location -->
+<section id="location" class="section">
+  <h2>Visit Our Store</h2>
+  <p>
+    📍 <strong>Pooja Stationers and Gift Articles and Xerox</strong><br>
+    Gf-2, Shashi Avenue, Opp. Manthan 222,<br>
+    Vatva, Ahmedabad, Gujarat 382445
+  </p>
+
+  <div class="cta-row">
+    <a class="btn btn-primary" href="https://maps.google.com/?q=Pooja+Stationers+and+Gift+Articles+and+Xerox,+Gf-2+Shashi+Avenue,+Opp.+Manthan+222,+Vatva,+Ahmedabad,+Gujarat+382445" target="_blank">📍 Open in Google Maps</a>
+    <a class="btn btn-outline" href="tel:+918200304556">📞 Call Now</a>
+  </div>
+
+  <div class="map-box">
+    <iframe
+      src="https://www.google.com/maps?q=Pooja+Stationers+and+Gift+Articles+and+Xerox,+Gf-2+Shashi+Avenue,+Opp.+Manthan+222,+Vatva,+Ahmedabad,+Gujarat+382445&output=embed"
+      allowfullscreen
+      loading="lazy"
+      referrerpolicy="no-referrer-when-downgrade">
+    </iframe>
+  </div>
+</section>
+
+<footer>
+  © 2026 Pooja Stationers & Gift Articles · Vatva, Ahmedabad
+</footer>
+
+<!-- Floating WhatsApp -->
+<a class="floating-wa" href="https://wa.me/918200304556" target="_blank" aria-label="Chat on WhatsApp">💬</a>
+
+<!-- Wishlist Floating Button -->
+<div class="wishlist-btn" onclick="toggleWishlist()">❤️
+  <div class="wishlist-count" id="wishlistCount">0</div>
+</div>
+
+<!-- Wishlist Panel -->
+<div class="wishlist-panel" id="wishlistPanel" onclick="closeWishlist(event)">
+  <div class="wishlist-box">
+    <div class="wishlist-header">
+      <strong>Your Wishlist</strong>
+      <button class="btn btn-outline" onclick="toggleWishlist()">Close</button>
+    </div>
+    <div id="wishlistItems"></div>
+    <div style="margin-top:14px;text-align:center">
+      <a class="btn btn-primary" id="sendWishlistBtn" target="_blank">💬 Send Wishlist on WhatsApp</a>
+    </div>
+  </div>
+</div>
+
+<script>
+/* =========================
+   PRODUCT DATA
+========================= */
+const products = [
+/* ================= SCHOOL (27) ================= */
+{id:1,name:"Pens Pack",img:"1.png",category:"school"},
+{id:2,name:"Study Table",img:"2.png",category:"school"},
+{id:3,name:"Highlighters",img:"3.png",category:"school"},
+{id:4,name:"Notebooks",img:"4.png",category:"school"},
+{id:5,name:"Geometry Box",img:"5.png",category:"school"},
+{id:6,name:"Mechanical Pencil",img:"6.png",category:"school"},
+{id:7,name:"Scissors",img:"7.png",category:"school"},
+{id:8,name:"Water bottle",img:"8.png",category:"school"},
+{id:9,name:"Sticky Notes",img:"9.png",category:"school"},
+{id:10,name:"Withner",img:"10.png",category:"school"},
+{id:11,name:"Flair Stationery Kit",img:"11.png",category:"school"},
+{id:12,name:"Coloring Pens",img:"12.png",category:"school"},
+{id:13,name:"Pencils",img:"13.png",category:"school"},
+{id:14,name:"Bubble Pens",img:"14.png",category:"school"},
+{id:15,name:"Layering Pens",img:"15.png",category:"school"},
+{id:16,name:"Metal Pens",img:"16.png",category:"school"},
+{id:17,name:"Ball Pen",img:"17.png",category:"school"},
+{id:18,name:"Compass Box",img:"18.png",category:"school"},
+{id:19,name:"Pouch",img:"19.png",category:"school"},
+{id:20,name:"Writing Pad",img:"20.png",category:"school"},
+{id:21,name:"Diary",img:"21.png",category:"school"},
+{id:22,name:"Eraser",img:"22.png",category:"school"},
+{id:23,name:"Sharpner",img:"23.png",category:"school"},
+{id:24,name:"Answer Sheet",img:"school24.png",category:"school"},
+{id:25,name:"Chalk",img:"25.png",category:"school"},
+{id:26,name:"Fountain Pen",img:"26.png",category:"school"},
+{id:27,name:"Unicorn colour Pen",img:"27.png",category:"school"},
+
+/* ================= GIFT (29) ================= */
+{id:28,name:"Teddy Bear",img:"28.png",category:"gift"},
+{id:29,name:"Greeting Cards",img:"29.png",category:"gift"},
+{id:30,name:"Key Chains",img:"30.png",category:"gift"},
+{id:31,name:"Wrist Watch",img:"31.png",category:"gift"},
+{id:32,name:"God Photo Frame",img:"32.png",category:"gift"},
+{id:33,name:"Art Piece",img:"33.png",category:"gift"},
+{id:34,name:"Wall Clock",img:"34.png",category:"gift"},
+{id:35,name:"Desk Calender",img:"35.png",category:"gift"},
+{id:36,name:"Panda Gift set",img:"36.png",category:"gift"},
+{id:37,name:"Car Gift set",img:"37.png",category:"gift"},
+{id:38,name:"Sterring wheel Toy",img:"38.png",category:"gift"},
+{id:39,name:"Wild Stone Perfume",img:"39.png",category:"gift"},
+{id:40,name:"Denver Perfume",img:"40.png",category:"gift"},
+{id:41,name:"Black london perfume",img:"41.png",category:"gift"},
+{id:42,name:"Train set Toy",img:"42.png",category:"gift"},
+{id:43,name:"Activity Bag",img:"43.png",category:"gift"},
+{id:44,name:"Magic Gift set",img:"44.png",category:"gift"},
+{id:45,name:"Soft Toy",img:"45.png",category:"gift"},
+{id:46,name:"Toy Car",img:"46.png",category:"gift"},
+{id:47,name:"Taj Mahal art",img:"47.png",category:"gift"},
+{id:48,name:"Love Cushion",img:"48.png",category:"gift"},
+{id:49,name:"Flower Pot",img:"49.png",category:"gift"},
+{id:50,name:"Led Herat Mirror",img:"50.png",category:"gift"},
+{id:51,name:"Hand Purse",img:"51.png",category:"gift"},
+{id:52,name:"Toy Fan",img:"52.png",category:"gift"},
+{id:53,name:"SuperHero Gift set",img:"53.png",category:"gift"},
+{id:54,name:"Piano Toy",img:"54.png",category:"gift"},
+{id:55,name:"Computer Toy",img:"55.png",category:"gift"},
+{id:56,name:"Toy Gun set",img:"56.png",category:"gift"},
+
+/* ================= ART (29) ================= */
+{id:57,name:"Acrylic Colours",img:"57.png",category:"art"},
+{id:58,name:"Water Colours",img:"58.png",category:"art"},
+{id:59,name:"Brush Set",img:"59.png",category:"art"},
+{id:60,name:"Glue Gun",img:"60.png",category:"art"},
+{id:61,name:"Marker",img:"61.png",category:"art"},
+{id:62,name:"Colour Paper",img:"62.png",category:"art"},
+{id:63,name:"Project Paper",img:"63.png",category:"art"},
+{id:64,name:"Cardboard",img:"64.png",category:"art"},
+{id:65,name:"Colour Kit",img:"65.png",category:"art"},
+{id:66,name:"Clay",img:"66.png",category:"art"},
+{id:67,name:"FeviStick",img:"67.png",category:"art"},
+{id:68,name:"Drawing Book",img:"68.png",category:"art"},
+{id:69,name:"Colour Pencil",img:"69.png",category:"art"},
+{id:70,name:"Wax Crayons",img:"70.png",category:"art"},
+{id:71,name:"Gliter Colour",img:"71.png",category:"art"},
+{id:72,name:"Carbon paper",img:"72.png",category:"art"},
+{id:73,name:"Sketch Pen",img:"73.png",category:"art"},
+{id:74,name:"Oil Pastel",img:"74.png",category:"art"},
+{id:75,name:"Transperent",img:"75.png",category:"art"},
+{id:76,name:"Colouring Tape",img:"76.png",category:"art"},
+{id:77,name:"Paper Cutter",img:"77.png",category:"art"},
+{id:78,name:"Fevicol",img:"78.png",category:"art"},
+{id:79,name:"Brown Tape",img:"79.png",category:"art"},
+{id:80,name:"Butter Paper",img:"80.png",category:"art"},
+{id:81,name:"Ice cream sticks",img:"81.png",category:"art"},
+{id:82,name:"White paper A4",img:"82.png",category:"art"},
+{id:83,name:"Stones",img:"83.png",category:"art"},
+{id:84,name:"Chart paper",img:"84.png",category:"art"},
+
+
+/* ================= OFFICE (16) ================= */
+{id:86,name:"Office Register",img:"86.png",category:"office"},
+{id:87,name:"Stapler",img:"87.png",category:"office"},
+{id:88,name:"Calculator",img:"88.png",category:"office"},
+{id:89,name:"Envelope",img:"89.png",category:"office"},
+{id:90,name:"Files",img:"90.png",category:"office"},
+{id:91,name:"Diary",img:"91.png",category:"office"},
+{id:92,name:"Pen Holder",img:"92.png",category:"office"},
+{id:93,name:"Writing Pad",img:"20.png",category:"office"},
+{id:94,name:"Pinching Pad",img:"94.png",category:"office"},
+{id:95,name:"Stamp",img:"95.png",category:"office"},
+{id:96,name:"Folder",img:"96.png",category:"office"},
+{id:97,name:"Cell",img:"97.png",category:"office"},
+{id:98,name:"Staple pin",img:"98.png",category:"office"},
+{id:99,name:"Cello Water Bottle",img:"99.png",category:"office"},
+{id:100,name:"Duster",img:"100.png",category:"office"},
+{id:101,name:"Buzzer",img:"101.png",category:"office"},
+
+/* ================= SPORTS (20) ================= */
+{id:102,name:"Cricket Bat",img:"102.png",category:"sports"},
+{id:103,name:"Cricket Ball",img:"103.png",category:"sports"},
+{id:104,name:"Chess Board",img:"104.png",category:"sports"},
+{id:105,name:"Carrom Board",img:"105.png",category:"sports"},
+{id:106,name:"Shuttle Cock",img:"108.png",category:"sports"},
+{id:107,name:"Football",img:"106.png",category:"sports"},
+{id:108,name:"Skipping Rope",img:"110.png",category:"sports"},
+{id:109,name:"Cricket Stump",img:"111.png",category:"sports"},
+{id:110,name:"Carrom Coins",img:"109.png",category:"sports"},
+{id:111,name:"Badminton Racket",img:"107.png",category:"sports"},
+{id:112,name:"Ludo Board",img:"112.png",category:"sports"},
+{id:113,name:"Businessman Board Game",img:"113.png",category:"sports"},
+{id:114,name:"Carrom Powder",img:"114.png",category:"sports"},
+{id:115,name:"Rubik Cube",img:"117.png",category:"sports"},
+{id:116,name:"Moon ball",img:"116.png",category:"sports"},
+{id:117,name:"Hand Grip",img:"115.png",category:"sports"},
+{id:118,name:"Smile Ball soft",img:"118.png",category:"sports"},
+{id:119,name:"Basketb Ball",img:"119.png",category:"sports"},
+{id:120,name:"Snake & ladder",img:"120.png",category:"sports"},
+{id:121,name:"Tennis Ball",img:"121.png",category:"sports"},
+
+/* ================= DECOR (10) ================= */
+{id:122,name:"Ballons",img:"122.png",category:"decor"},
+{id:123,name:"Candles",img:"123.png",category:"decor"},
+{id:124,name:"Party Hats",img:"124.png",category:"decor"},
+{id:125,name:"Gift Wrapping Paper",img:"125.png",category:"decor"},
+{id:126,name:"Party Spray",img:"126.png",category:"decor"},
+{id:127,name:"Ribbion",img:"127.png",category:"decor"},
+{id:128,name:"Birthday Crown",img:"128.png",category:"decor"},
+{id:129,name:"Foil Balloons",img:"129.png",category:"decor"},
+{id:130,name:"Happy Birthday Banner",img:"130.png",category:"decor"},
+{id:131,name:"Double Tape",img:"131.png",category:"decor"},
+
+/* ================= CUSTOM (9) ================= */
+{id:132,name:"Custom Mug Print",img:"132.png",category:"custom"},
+{id:133,name:"Photo Frame Print",img:"133.png",category:"custom"},
+{id:134,name:"T-Shirt Printing",img:"134.png",category:"custom"},
+{id:135,name:"Custom Metal Sheet sketch photo",img:"custom4.png",category:"custom"},
+{id:136,name:"Keychain Photo Print",img:"136.png",category:"custom"},
+{id:137,name:"Magic Cushion Print",img:"135.png",category:"custom"},
+{id:138,name:"Custom Clock",img:"139.png",category:"custom"},
+{id:139,name:"Custom Calender",img:"137.png",category:"custom"},
+{id:140,name:"Photo ",img:"138.png",category:"custom"},
+
+/* ================= XEROX (5) ================= */
+{id:141,name:"PVC Adhaar Card",img:"141.png",category:"xerox"},
+{id:142,name:"PVC Pan card",img:"142.png",category:"xerox"},
+{id:143,name:"Money Transfer",img:"xerox3.png",category:"xerox"},
+{id:144,name:"Xerox",img:"144.png",category:"xerox"},
+{id:145,name:"Lamination",img:"145.png",category:"xerox"}
+];
+
+
+/* ================= RENDER PRODUCTS ================= */
+const grid = document.getElementById("productGrid");
+const title = document.getElementById("productTitle");
+const subtitle = document.getElementById("productSubtitle");
+
+function renderProducts(list){
+  grid.innerHTML = "";
+  list.forEach(p=>{
+    const card = document.createElement("div");
+    card.className = "card product";
+    card.innerHTML = `
+    <img src="${p.img}" alt="${p.name}" onclick="openZoom('${p.img}')">
+      <h3>${p.name}</h3>
+      <div class="actions">
+        <button class="primary" onclick="addToWishlist(${p.id})">❤️ Wishlist</button>
+        <button onclick="sendEnquiry('${p.name}')">💬 Enquiry</button>
+      </div>
+    `;
+    grid.appendChild(card);
+  });
+}
+
+/* ================= WHATSAPP ENQUIRY ================= */
+function sendEnquiry(productName){
+  const msg = `Hello Pooja Stationers, I want to enquire about: ${productName}`;
+  window.open(`https://wa.me/918200304556?text=${encodeURIComponent(msg)}`,'_blank');
+}
+
+/* ================= CATEGORY FILTER ================= */
+function showCategory(cat, btn){
+  document.querySelectorAll(".category-buttons button").forEach(b=>b.classList.remove("active"));
+  btn.classList.add("active");
+
+  const names = {
+    school:"School Stationery",
+    gift:"Gift Articles",
+    art:"Art & Craft Supplies",
+    office:"Office Supplies",
+    sports:"Sports Items",
+    decor:"Decor Items",
+    custom:"Custom Products",
+    xerox:"Xerox Services"
+  };
+
+  title.textContent = names[cat] || "Products";
+  subtitle.textContent = "Showing selected category products";
+  renderProducts(products.filter(p=>p.category === cat));
+}
+
+/* ================= WISHLIST ================= */
+let wishlist = JSON.parse(localStorage.getItem("wishlist")) || [];
+
+function saveWishlist(){
+  localStorage.setItem("wishlist", JSON.stringify(wishlist));
+  updateWishlistUI();
+}
+
+function addToWishlist(id){
+  if(!wishlist.includes(id)){
+    wishlist.push(id);
+    saveWishlist();
+    alert("Added to wishlist ❤️");
+  }else{
+    alert("Already in wishlist 👍");
+  }
+}
+
+function removeFromWishlist(id){
+  wishlist = wishlist.filter(x=>x!==id);
+  saveWishlist();
+}
+
+function updateWishlistUI(){
+  const count = document.getElementById("wishlistCount");
+  const listBox = document.getElementById("wishlistItems");
+  count.textContent = wishlist.length;
+  listBox.innerHTML = "";
+
+  if(wishlist.length === 0){
+    listBox.innerHTML = "<p style='text-align:center'>No items in wishlist.</p>";
+  }
+
+  wishlist.forEach(id=>{
+    const p = products.find(x=>x.id===id);
+    const row = document.createElement("div");
+    row.className = "wishlist-item";
+    row.innerHTML = `
+      <img src="${p.img}">
+      <div>${p.name}</div>
+      <button onclick="removeFromWishlist(${p.id})">Remove</button>
+    `;
+    listBox.appendChild(row);
+  });
+
+  const msg = wishlist.map(id=>{
+    const p = products.find(x=>x.id===id);
+    return "• " + p.name;
+  }).join("%0A");
+
+  document.getElementById("sendWishlistBtn").href =
+    "https://wa.me/918200304556?text=Hello%20Pooja%20Stationers,%20I%20am%20interested%20in:%0A" + msg;
+}
+
+function toggleWishlist(){
+  document.getElementById("wishlistPanel").classList.toggle("active");
+}
+
+function closeWishlist(e){
+  if(e.target.id === "wishlistPanel") toggleWishlist();
+}
+
+/* ================= ADMIN PANEL ================= */
+function openAdmin(){
+  document.getElementById("adminPanel").style.display = "flex";
+}
+function closeAdmin(){
+  document.getElementById("adminPanel").style.display = "none";
+}
+function addNewProduct(){
+  const name = document.getElementById("adminName").value;
+  const img = document.getElementById("adminImg").value;
+  const cat = document.getElementById("adminCat").value;
+  const newCat = document.getElementById("adminNewCat").value.trim().toLowerCase();
+
+  if(!name || !img){ alert("Fill all fields"); return; }
+
+  let finalCategory = cat;
+
+  // If admin typed a new category
+  if(newCat){
+    finalCategory = newCat;
+
+    // Add new button if not already exists
+    if(!document.querySelector(`[data-cat='${newCat}']`)){
+      const btn = document.createElement("button");
+      btn.textContent = newCat.charAt(0).toUpperCase() + newCat.slice(1);
+      btn.setAttribute("data-cat", newCat);
+      btn.onclick = function(){ showCategory(newCat, btn); };
+      document.querySelector(".category-buttons").appendChild(btn);
+    }
+  }
+
+  const newId = products.length + 1;
+  products.push({ id:newId, name:name, img:img, category:finalCategory });
+
+  alert("Product Added!");
+  closeAdmin();
+  renderProducts(products.filter(p=>p.category===finalCategory));
+}
+
+/* Init */
+renderProducts(products.slice(0,10));
+updateWishlistUI();
+
+function openZoom(img){
+  document.getElementById("zoomImg").src = img;
+  document.getElementById("zoomModal").style.display = "flex";
+}
+
+function closeZoom(){
+  document.getElementById("zoomModal").style.display = "none";
+}
+const ADMIN_PASSWORD = "admin123"; // 👈 change password here
+
+function askAdminPassword(){
+  const pass = prompt("Enter Admin Password:");
+  if(pass === ADMIN_PASSWORD){
+    openAdmin();
+  }else{
+    alert("Wrong password ❌");
+  }
+}
+const imgInput = document.getElementById("adminImg");
+if(imgInput){
+  imgInput.addEventListener("input", function(){
+    const url = this.value.trim();
+    const img = document.getElementById("previewImg");
+    if(url){
+      img.src = url;
+      img.style.display = "block";
+    } else {
+      img.style.display = "none";
+    }
+  });
+}
+</script>
+<!-- ADMIN BUTTON -->
+<button onclick="askAdminPassword()" style="position:fixed;left:15px;bottom:20px;z-index:999;padding:10px 14px;border-radius:20px;border:none;background:#222;color:#fff;font-size:12px;">
+⚙ Admin
+</button>
+
+
+<!-- ADMIN PANEL -->
+<div id="adminPanel" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.6);z-index:2000;justify-content:center;align-items:center;">
+  <div style="background:#fff;padding:20px;border-radius:16px;width:90%;max-width:400px">
+    <h3>Add New Product</h3>
+
+    <input id="adminName" placeholder="Product Name" style="width:100%;margin:6px 0;padding:8px">
+
+    <input id="adminImg" placeholder="Paste Image LINK (from imgbb)" style="width:100%;margin:6px 0;padding:8px">
+
+    <img id="previewImg" style="width:100%;margin-top:8px;border-radius:12px;display:none">
+
+    <select id="adminCat" style="width:100%;margin:6px 0;padding:8px">
+      <option value="school">School</option>
+      <option value="gift">Gift</option>
+      <option value="art">Art</option>
+      <option value="office">Office</option>
+      <option value="sports">Sports</option>
+      <option value="decor">Decor</option>
+      <option value="custom">Custom</option>
+      <option value="xerox">Xerox</option>
+    </select>
+
+    <input id="adminNewCat" placeholder="New Category Name (optional)" style="width:100%;margin:6px 0;padding:8px">
+
+    <button onclick="addNewProduct()" style="margin-top:10px;width:100%;padding:10px;background:#3a86ff;color:white;border:none;border-radius:8px">Add Product</button>
+    <button onclick="closeAdmin()" style="margin-top:6px;width:100%;padding:8px;background:#eee;border:none;border-radius:8px">Close</button>
+  </div>
+</div>
+
+<!-- PRODUCT ZOOM MODAL -->
+<div id="zoomModal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.8);z-index:3000;justify-content:center;align-items:center;">
+  <span onclick="closeZoom()" style="position:absolute;top:20px;right:25px;font-size:30px;color:white;cursor:pointer;">✖</span>
+  <img id="zoomImg" style="max-width:90%;max-height:80%;border-radius:16px;box-shadow:0 0 30px rgba(255,255,255,0.3)">
+</div>
+
+</body>
+</html>
